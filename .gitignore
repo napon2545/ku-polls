@@ -1,0 +1,57 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# wiki is a separate repository
+wiki/
+# my config notes
+configure.txt
+
+# IDE files
+.idea
+.project
+.vscode
+*.swp
+
+# C extensions
+*.so
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Django stuff:
+*.log
+local_settings.py
+#db.sqlite3
+#db.sqlite3-journal
+
+# pipenv
+Pipfile.lock
+
+# Environments and settings
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# mkdocs documentation
+/site
