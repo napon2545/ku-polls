@@ -1,9 +1,10 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import Choice, Question, Vote
 
@@ -31,6 +32,16 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
+
+    def get(self, request, *args, **kwargs):
+        question = self.get_object()
+
+        # Check if voting is allowed for this question
+        if not question.can_vote():
+            messages.error(request, "Voting is not allowed for this question.")
+            return redirect('polls:index')
+
+        return super().get(request, *args, **kwargs)
 
 
 class ResultsView(generic.DetailView):

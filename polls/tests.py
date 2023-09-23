@@ -37,6 +37,54 @@ class QuestionModelTests(TestCase):
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
+    def test_future_pub_date(self):
+        """
+        Questions with a future pub_date should not be published yet.
+        """
+        future_date = timezone.now() + timezone.timedelta(days=7)
+        future_question = Question(pub_date=future_date)
+        self.assertFalse(future_question.is_published())
+
+    def test_current_pub_date(self):
+        """
+        Questions with the default (current) pub_date should be published.
+        """
+        current_question = Question(pub_date=timezone.now())
+        self.assertTrue(current_question.is_published())
+
+    def test_past_pub_date(self):
+        """
+        Questions with a past pub_date should be published.
+        """
+        past_date = timezone.now() - timezone.timedelta(days=7)
+        past_question = Question(pub_date=past_date)
+        self.assertTrue(past_question.is_published())
+
+    def test_can_vote_when_end_date_is_null(self):
+        """Can vote even if the end_date is null."""
+        question = Question(pub_date=timezone.now())
+        self.assertIs(question.can_vote(), True)
+
+    def test_can_vote_when_within_date_range(self):
+        """Can vote when within the vote duration (between pub_date and end_date)."""
+        pub_date = timezone.now() - datetime.timedelta(days=1)
+        end_date = timezone.now() + datetime.timedelta(days=1)
+        question = Question(pub_date=pub_date, end_date=end_date)
+        self.assertIs(question.can_vote(), True)
+
+    def test_cannot_vote_when_before_pub_date(self):
+        """Cannot vote if the question isn't publish yet.(now < pub_date)"""
+        pub_date = timezone.now() + datetime.timedelta(days=1)
+        question = Question(pub_date=pub_date)
+        self.assertIs(question.can_vote(), False)
+
+    def test_cannot_vote_when_after_end_date(self):
+        """Cannot vote if the current date is after end_date."""
+        pub_date = timezone.now() - datetime.timedelta(days=2)
+        end_date = timezone.now() - datetime.timedelta(days=1)
+        question = Question(pub_date=pub_date, end_date=end_date)
+        self.assertIs(question.can_vote(), False)
+
 
 def create_question(question_text, days):
     """
@@ -123,6 +171,9 @@ class QuestionDetailViewTests(TestCase):
         displays the question's text.
         """
         past_question = create_question(question_text='Past Question.', days=-5)
-        url = reverse('polls:detail', args=(past_question.id,))
-        response = self.client.get(url)
-        self.assertContains(response, past_question.question_text)
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(
+            response.context['latest_question_list'],
+            [past_question],
+        )
+
