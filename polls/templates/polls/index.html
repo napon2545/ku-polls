@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
@@ -8,11 +11,7 @@
    Please <a href="{% url 'login' %}?next={{request.path}}">Login to vote</a>
 {% endif %}
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="{{ message.tags }}">{{ message }}</div>
-    {% endfor %}
-{% endif %}
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
@@ -23,3 +22,4 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+{% endblock %}

@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
 <fieldset>
@@ -14,3 +18,5 @@
 
 <a href="{% url 'polls:results' question.id %}">Results</a>
 <a href="{% url 'polls:index' %}">Back to List of Polls</a>
+
+{% endblock %}

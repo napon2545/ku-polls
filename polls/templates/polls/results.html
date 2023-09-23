@@ -1,5 +1,12 @@
-<h1>{{ question.question_text }}</h1>
+{% extends 'base.html' %}
 
+{% block content %}
+<h1>{{ question.question_text }}</h1>
+{% if messages %}
+    {% for message in messages %}
+        <div class="{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
 <table>
     <thead>
         <tr>
@@ -18,3 +25,4 @@
 </table>
 
 <a href="{% url 'polls:index' %}">Back to List of Polls</a>
+{% endblock %}
