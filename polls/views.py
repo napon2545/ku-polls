@@ -41,7 +41,13 @@ class DetailView(generic.DetailView):
             messages.error(request, "Voting is not allowed for this question.")
             return redirect('polls:index')
 
-        return super().get(request, *args, **kwargs)
+            # Check if the user has already voted for this question
+            previous_vote = Vote.objects.filter(user=request.user, choice__question=question).first()
+
+            return render(request, self.template_name, {
+                'question': question,
+                'previous_vote': previous_vote,  # Pass the user's previous vote to the template
+            })
 
 
 class ResultsView(generic.DetailView):
@@ -63,8 +69,6 @@ def vote(request, question_id):
         })
 
     this_user = request.user
-    # selected_choice.votes += 1
-    # selected_choice.save()
 
     try:
         # find a vote for this user and this question
@@ -76,7 +80,8 @@ def vote(request, question_id):
         vote = Vote(user=this_user, choice=selected_choice)
 
     vote.save()
-    # TODO: Use messages to display a confirmation on the results page.
+    # Display a confirmation on the results page.
+    messages.success(request, "Vote success!")
 
     # Always return an HttpResponseRedirect after successfully dealing
     # with POST data. This prevents data from being posted twice if a
