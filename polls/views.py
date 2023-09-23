@@ -41,13 +41,13 @@ class DetailView(generic.DetailView):
             messages.error(request, "Voting is not allowed for this question.")
             return redirect('polls:index')
 
-            # Check if the user has already voted for this question
-            previous_vote = Vote.objects.filter(user=request.user, choice__question=question).first()
+        # Check if the user has already voted for this question
+        previous_vote = Vote.objects.filter(user=request.user, choice__question=question).first()
 
-            return render(request, self.template_name, {
-                'question': question,
-                'previous_vote': previous_vote,  # Pass the user's previous vote to the template
-            })
+        return render(request, self.template_name, {
+            'question': question,
+            'previous_vote': previous_vote,  # Pass the user's previous vote to the template
+        })
 
 
 class ResultsView(generic.DetailView):
