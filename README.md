@@ -46,6 +46,7 @@ List of all project documents (Every documents are in [Project Wiki](../../wiki/
 - [Vision Statement](../../wiki/Vision%20Statement)
 - [Requirements](../../wiki/Requirements)
 - [Development Plan](../../wiki/Development%20Plan)
+- [Domain Model](../../wiki/Domain-Model)
 - [Iteration 1 Plan](../../wiki/Iteration%201%20Plan)
 - [Iteration 2 Plan](../../wiki/Iteration%202%20Plan)
 - [Iteration 3 Plan](../../wiki/Iteration%203%20Plan)
