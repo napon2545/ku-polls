@@ -14,11 +14,11 @@ python -m venv env
 
 Activate a virtual environment
 
-*Window
+* Window
 ```
 .\venv\Scripts\activate
 ```
-*macOS and Linux
+* macOS and Linux
 ```
 source venv/bin/activate
 ```
