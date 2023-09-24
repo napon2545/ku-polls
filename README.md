@@ -15,13 +15,13 @@ Create a virtual environment:
 python -m venv venv
 ```
 Activate the virtual environment:
-* macOS/Linux
-```
-source venv/bin/activate
-```
 * Window
 ```
 .\venv\Scripts\activate
+```
+* macOS and Linux
+```
+source venv/bin/activate
 ```
 
 Install the required packages:
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 Run the app
 ```
-python ./manage.py runserver
+python manage.py runserver
 ```
 
 # Demo Users
