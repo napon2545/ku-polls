@@ -1,6 +1,6 @@
 [![Python application](https://github.com/napon2545/ku-polls/actions/workflows/python-app.yml/badge.svg)](https://github.com/napon2545/ku-polls/actions/workflows/python-app.yml)
 # ku-polls
-An application for conducting survey and poll. This application is base on Django Tutorial Project, adding some more features.\
+An application for conducting survey and poll. This application is base on Django Tutorial Project, adding some more features.
 
 This application was created as a Kasetsart University's Individual Software Process course assignment.
 
