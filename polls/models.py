@@ -44,7 +44,6 @@ class Choice(models.Model):
     @property
     def vote(self):
         """Count the votes for this choice."""
-        # count the votes for this choice
         return self.vote_set.count()
 
     def __str__(self):

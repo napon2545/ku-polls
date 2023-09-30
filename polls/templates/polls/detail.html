@@ -4,7 +4,7 @@
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
-<fieldset>
+
     <legend><h1>{{ question.question_text }}</h1></legend>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for choice in question.choice_set.all %}
@@ -15,8 +15,8 @@
      />
         <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
     {% endfor %}
-</fieldset>
 
+<p>
 {% if question.can_vote %}
     {% if user.is_authenticated %}
         <input type="submit" value="Vote">
@@ -27,6 +27,7 @@
 Voting is <b>closed</b>.
 {% endif %}
 </form>
+</p>
 
 <p>
 <a href="{% url 'polls:results' question.id %}">Results</a>

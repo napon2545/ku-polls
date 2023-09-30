@@ -20,7 +20,7 @@ class IndexView(generic.ListView):
         """
         return Question.objects.filter(
             pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:5]
+        ).order_by('-pub_date')
 
 
 class DetailView(generic.DetailView):
@@ -78,7 +78,7 @@ def vote(request, question_id):
 
     try:
         # find a vote for this user and this question
-        vote = Vote.get_vote(user=this_user, choice__question=question)
+        vote = Vote.objects.get(user=this_user, choice__question=question)
         # update this vote
         vote.choice = selected_choice
     except Vote.DoesNotExist:
