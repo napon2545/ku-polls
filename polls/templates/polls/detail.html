@@ -11,8 +11,8 @@
         <input type="radio" id="choice{{ forloop.counter }}"
            name="choice"
            value="{{ choice.id }}"
-           {% if choice.id == selected_choice %} checked=True {% endif %}
-     />
+           {% if previous_vote and previous_vote.choice_id == choice.id %}checked{% endif %}>
+
         <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
     {% endfor %}
 
