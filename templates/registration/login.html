@@ -9,6 +9,7 @@
     {{ form.as_p }}
     <p>
     <button type="submit">Login</button>
+    or <a href="{% url 'polls:index' %}">view polls as visitor</a>
     </p>
     <input type="hidden" name="next" value="{{next}}"/>
  </form>

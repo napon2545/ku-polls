@@ -42,7 +42,9 @@ class DetailView(generic.DetailView):
             return redirect('polls:index')
 
         # Check if the user has already voted for this question
-        previous_vote = Vote.objects.filter(user=request.user, choice__question=question).first()
+        previous_vote = None
+        if request.user.is_authenticated:
+            previous_vote = Vote.objects.filter(user=request.user, choice__question=question).first()
 
         return render(request, self.template_name, {
             'question': question,
