@@ -12,8 +12,8 @@ th { background: lightgray; }
 }
 .header {
     padding: 4px;
-    background: lightgray;
-    color: blue;
+    /*background: lightgray;*/
+    color: lightblue;
     /*font-size: 0.9rem;*/
 }
 .error {
