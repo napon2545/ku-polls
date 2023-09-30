@@ -67,12 +67,16 @@ def vote(request, question_id):
             'question': question,
             'error_message': "You didn't select a choice.",
         })
+    if not question.can_vote():
+        messages.error(request,
+                       f'Voting not currently accepted for "{question.question_text}".')
+        return redirect('polls:index')
 
     this_user = request.user
 
     try:
         # find a vote for this user and this question
-        vote = Vote.objects.get(user=this_user, choice__question=question)
+        vote = Vote.get_vote(user=this_user, choice__question=question)
         # update this vote
         vote.choice = selected_choice
     except Vote.DoesNotExist:

@@ -1,3 +1,29 @@
+th, td { padding: 4px 6px; }
+th { background: lightgray; }
+* { font-family: Arial, Helvetica, sans-serif; }
+.header {
+    padding: 4px;
+    background: lightgray;
+    color: blue;
+    font-size: 0.9rem;
+}
+.error {
+    color: red;
+}
+.greeting {
+    color: blue;
+}
+.help-text {
+     font-size: 0.9rem;
+    color: gray;
+    margin-left: 2em;
+    /* background-color: #0056b3; */
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+.small {
+    font-size: 0.7rem;
+}
 li a {
     color: white;
 }

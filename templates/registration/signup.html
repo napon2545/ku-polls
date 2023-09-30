@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <table style="padding: 2ex;">
+    {{ form.as_table }}     {# this line shows the sign-up form #}
+    <tr>
+    <td colspan="2">
+    <button type="submit">Register</button>
+    </td>
+    </tr>
+    </table>
+
+    <button type="submit">Sign Up</button>
+    or
+    <a href="{% url 'polls:index' %}">View polls as a visitor</a>
+</form>
+
+<div class="help-text">
+    <p>Guidelines</p>
+    {% for field in form %}
+        {{ field.help_text }}
+    {% endfor %}
+</div>
+{% endblock %}
