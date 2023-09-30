@@ -39,6 +39,12 @@ python manage.py runserver
 |-----------|-----------------|
 |   dummy1578   | justadummy123 |
 |   testaccount420   | example999 |
+
+# Admin User
+| Username  | Password        |
+|-----------|-----------------|
+|   napon2545   | password |
+
 # Project Documents
 
 List of all project documents (Every documents are in [Project Wiki](../../wiki/Home).)
