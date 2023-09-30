@@ -1,6 +1,41 @@
+@font-face {
+    font-family: 'Maaja';
+    src: url('/font/maaja.woff2') format('woff2'),
+         url('/font/maaja.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+th, td { padding: 4px 6px; }
+th { background: lightgray; }
+* { font-family: Maaja;
+    font-size: 1.5rem;
+}
+.header {
+    padding: 4px;
+    /*background: lightgray;*/
+    color: lightblue;
+    /*font-size: 0.9rem;*/
+}
+.error {
+    color: red;
+}
+.greeting {
+    color: blue;
+}
+.help-text {
+     font-size: 0.9rem;
+    color: gray;
+    margin-left: 2em;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+.small {
+    font-size: 0.7rem;
+}
 li a {
     color: white;
 }
 body {
     background: white url("images/background.png") no-repeat;
+    color: white;
 }

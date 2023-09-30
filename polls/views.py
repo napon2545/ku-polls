@@ -20,7 +20,7 @@ class IndexView(generic.ListView):
         """
         return Question.objects.filter(
             pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:5]
+        ).order_by('-pub_date')
 
 
 class DetailView(generic.DetailView):
@@ -42,7 +42,9 @@ class DetailView(generic.DetailView):
             return redirect('polls:index')
 
         # Check if the user has already voted for this question
-        previous_vote = Vote.objects.filter(user=request.user, choice__question=question).first()
+        previous_vote = None
+        if request.user.is_authenticated:
+            previous_vote = Vote.objects.filter(user=request.user, choice__question=question).first()
 
         return render(request, self.template_name, {
             'question': question,
@@ -67,6 +69,10 @@ def vote(request, question_id):
             'question': question,
             'error_message': "You didn't select a choice.",
         })
+    if not question.can_vote():
+        messages.error(request,
+                       f'Voting not currently accepted for "{question.question_text}".')
+        return redirect('polls:index')
 
     this_user = request.user
 
